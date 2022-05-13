@@ -16,7 +16,7 @@ import Forminput from '../components/FormInput';
 import Formbutton from '../components/FormButton';
 import {useNavigation} from '@react-navigation/native';
 import SocialButton from '../components/SocialButton';
-import {AuthContext} from '../navigation/AuthProvider';
+import {AuthContext} from '../navigation/AuthProvider.android';
 
 const SignupScreen = () => {
   const {register} = useContext(AuthContext);
