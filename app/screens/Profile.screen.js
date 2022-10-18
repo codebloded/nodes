@@ -1,21 +1,27 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
-const ProfileScreen = () => {
-  return (
-    <View style={styles.container}>
-      <Text>Profile</Text>
-    </View>
-  );
+
+const ProfileScreen = ({ navigation }) => {
+	return (
+		<View style={styles.container}>
+			<Text style={styles.color}>Profile Screen</Text>
+			<Button title="Go to Home" onPress={() => {
+				navigation.navigate('Home')
+			}} />
+		</View>
+	);
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+	container: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	color: {
+		color: 'black',
+	}
 });
 
 export default ProfileScreen;

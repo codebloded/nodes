@@ -1,62 +1,94 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import React, { createRef, useRef } from 'react';
+import { View, StyleSheet } from 'react-native';
 import {
-  Card,
-  Container,
-  FeedTime,
-  Interactions,
-  InteractionsText,
-  InteractionButtons,
-  PostImage,
-  PostText,
-  UserImage,
-  UserInfo,
-  UserName,
-  UserNameContainer,
-  Divider,
+	Card,
+	Container,
+	FeedTime,
+	Interactions,
+	InteractionsText,
+	InteractionButtons,
+	PostImage,
+	PostText,
+	UserImage,
+	UserInfo,
+	UserName,
+	UserNameContainer,
+	Divider,
+	StatsContainer,
+	More,
+	Header,
+	CommentsContainer,
+	Comment,
+	CommentText,
 } from '../../styles/Feed.style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const CardLayout = ({item}) => {
-  const liked = item.liked ? 'heart' : 'heart-outline';
-  const likedColor = item.liked ? '#2e64e5' : '#333';
-  let likedText = '';
+const CardLayout = ({ item, bs }) => {
+	const liked = item.liked ? 'heart' : 'heart-outline';
+	const likedColor = item.liked ? '#2e64e5' : '#333';
+	let likedText = '';
 
-  if (item.likes == 1) {
-    likedText = '1 Like';
-  } else if (item.likes > 1) {
-    likedText = item.likes + ' Likes';
-  } else {
-    likedText = 'Like';
-  }
-  return (
-    <Card>
-      <UserInfo>
-        <UserImage source={require('../../assets/usr.jpg')} />
-        <UserNameContainer>
-          <UserName>{item.user.name}</UserName>
-          <FeedTime>4 hours ago</FeedTime>
-        </UserNameContainer>
-      </UserInfo>
-      <PostText>{item.postText}</PostText>
-      {item.postText !== 'none' ? (
-        <PostImage source={item.user.image} />
-      ) : (
-        <Divider />
-      )}
+	if (item.likes == 1) {
+		likedText = '1 Like';
+	} else if (item.likes > 1) {
+		likedText = item.likes + ' Likes';
+	} else {
+		likedText = 'Like';
+	}
 
-      <Interactions>
-        <InteractionButtons active={item.liked}>
-          <Ionicons name={liked} size={25} color={likedColor} />
-          <InteractionsText active={item.liked}>{likedText}</InteractionsText>
-        </InteractionButtons>
-        <InteractionButtons active={item.liked}>
-          <Ionicons name="md-chatbubble-outline" size={25} color={likedColor} />
-          <InteractionsText>Comments</InteractionsText>
-        </InteractionButtons>
-      </Interactions>
-    </Card>
-  );
+	return (
+		<Card>
+			<Header>
+				<UserInfo>
+					<UserImage source={require('../../assets/usr.jpg')} />
+					<UserNameContainer>
+						<UserName>{item.user.name}</UserName>
+						<FeedTime>4 hours ago</FeedTime>
+					</UserNameContainer>
+				</UserInfo>
+				<More>
+					<Ionicons name="ellipsis-horizontal" size={20} color="#73788b" onPress={() => bs.current.snapTo(0)} />
+				</More>
+			</Header>
+
+			{item.postText !== 'none' ? (
+				<PostImage source={item.user.image} />
+			) : (
+				<Divider />
+			)}
+
+			<Interactions>
+				<InteractionButtons>
+					<Ionicons name={liked} size={25} color={likedColor} />
+				</InteractionButtons>
+				<InteractionButtons>
+					<Ionicons name="chatbubble-outline" size={25} color="#333" />
+				</InteractionButtons>
+				<InteractionButtons>
+					<Ionicons name="paper-plane-outline" size={25} color="#333" />
+				</InteractionButtons>
+			</Interactions>
+
+			<StatsContainer>
+				<InteractionsText>2334 likes</InteractionsText>
+				<InteractionsText>|</InteractionsText>
+				<InteractionsText>24 comments</InteractionsText>
+			</StatsContainer>
+
+			<PostText>{item.postText}</PostText>
+
+			<CommentsContainer>
+				<UserName>hix34</UserName>
+				<Comment><CommentText>Nice application in react native </CommentText></Comment>
+			</CommentsContainer>
+
+			<CommentsContainer>
+				<UserName>rohan16</UserName>
+				<Comment><CommentText>Nice application in react native </CommentText></Comment>
+			</CommentsContainer>
+
+		</Card>
+	);
 };
 
 export default CardLayout;
