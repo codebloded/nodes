@@ -19,27 +19,25 @@ import { AuthContext } from '../navigation/AuthProvider';
 import { ScreenHeading } from '../styles/Auth.styles';
 import { Button } from 'react-native-paper';
 
-const LoginScreen = () => {
+const ResetPassword = () => {
     const navigation = useNavigation();
-    const { login, googleLogin } = useContext(AuthContext);
-    const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     return (
-        <ScrollView>
-            <ScreenHeading>Sign Up</ScreenHeading>
+        <>
+
+            <ScreenHeading>Reset Password</ScreenHeading>
             <SafeAreaView style={styles.container}>
-                <Forminput
-                    onChangeText={text => setEmail(text)}
-                    placeholder="Email"
-                    lableView={email}
-                    keyboardType="email-address"
-                    iconType="ios-mail"
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                />
                 <Forminput
                     onChangeText={text => setPassword(text)}
                     placeholder="Password"
+                    lableView={password}
+                    iconType="ios-key"
+                    secureTextEntry={true}
+                />
+
+                <Forminput
+                    onChangeText={text => setPassword(text)}
+                    placeholder="Confirm Password"
                     lableView={password}
                     iconType="ios-key"
                     secureTextEntry={true}
@@ -51,34 +49,11 @@ const LoginScreen = () => {
                     borderRadius: 25,
                 }}
                     mode="contained-tonal" buttonColor='black' textColor='#fafafa' onPress={() => console.log('Pressed')}>
-                    <Text style={styles.buttonText}>Sign up</Text>
+                    <Text style={styles.buttonText}>Reset</Text>
                 </Button>
-
-                <TouchableOpacity style={styles.forgot}>
-                    <Text style={styles.forgotText}>Forgot Password ?</Text>
-                </TouchableOpacity>
-                {Platform.OS === 'android' ? (
-                    <>
-                        <SocialButton
-                            buttonTitle="Sign in with Google"
-                            btnType="google"
-                            color="#d34e41"
-                            backgroundColor="#f5e7ea"
-                            onPress={() => {
-                                googleLogin();
-                            }}
-                        />
-                    </>
-                ) : null}
-                <TouchableOpacity
-                    style={styles.forgot}
-                    onPress={() => navigation.navigate('signup')}>
-                    <Text style={styles.forgotText}>
-                        Don't have an account? create here
-                    </Text>
-                </TouchableOpacity>
             </SafeAreaView>
-        </ScrollView>
+        </>
+
     );
 };
 
@@ -127,4 +102,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LoginScreen;
+export default ResetPassword;

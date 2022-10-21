@@ -20,10 +20,14 @@ import {
 	CommentsContainer,
 	Comment,
 	CommentText,
+	UserAvatar,
+	AddComment,
 } from '../../styles/Feed.style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Avatar, Text, TextInput } from 'react-native-paper';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const CardLayout = ({ item, bs }) => {
+const CardLayout = ({ item, bs, commnetBottomSheetRef }) => {
 	const liked = item.liked ? 'heart' : 'heart-outline';
 	const likedColor = item.liked ? '#2e64e5' : '#333';
 	let likedText = '';
@@ -62,7 +66,7 @@ const CardLayout = ({ item, bs }) => {
 					<Ionicons name={liked} size={25} color={likedColor} />
 				</InteractionButtons>
 				<InteractionButtons>
-					<Ionicons name="chatbubble-outline" size={25} color="#333" />
+					<Ionicons name="chatbubble-outline" size={25} color="#333" onPress={() => commnetBottomSheetRef.current.snapTo(0)} />
 				</InteractionButtons>
 				<InteractionButtons>
 					<Ionicons name="paper-plane-outline" size={25} color="#333" />
@@ -86,6 +90,12 @@ const CardLayout = ({ item, bs }) => {
 				<UserName>rohan16</UserName>
 				<Comment><CommentText>Nice application in react native </CommentText></Comment>
 			</CommentsContainer>
+			<AddComment>
+				<Avatar.Icon size={30} icon="account" />
+				<TouchableOpacity onPress={() => commnetBottomSheetRef.current.snapTo(0)}>
+					<Text style={{ padding: 5 }}>Add comments</Text>
+				</TouchableOpacity>
+			</AddComment>
 
 		</Card>
 	);

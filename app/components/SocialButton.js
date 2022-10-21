@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, StyleSheet, Text, Button, TouchableOpacity} from 'react-native';
-import {windowHeight} from '../utils/dimenssions';
+import { View, StyleSheet, Text, Button, TouchableOpacity } from 'react-native';
+import { windowHeight } from '../utils/dimenssions';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SocialButton = ({
@@ -13,18 +13,18 @@ const SocialButton = ({
   let bgColor = backgroundColor;
   return (
     <TouchableOpacity
-      style={[styles.buttonContainer, {backgroundColor: bgColor}]}
+      style={[styles.buttonContainer, { backgroundColor: bgColor }]}
       {...rest}>
       <View style={styles.iconWrapper}>
         <MaterialCommunityIcons
           name={btnType}
           style={styles.icon}
-          size={22}
+          size={23}
           color={color}
         />
       </View>
       <View style={styles.btnTxtWrapper}>
-        <Text style={[styles.buttonText, {color: color}]}>{buttonTitle}</Text>
+        <Text style={[styles.buttonText, { color: color }]}>{buttonTitle}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -34,10 +34,10 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: 10,
     width: '100%',
-    height: windowHeight / 15,
+    height: windowHeight / 16,
     padding: 10,
     flexDirection: 'row',
-    borderRadius: 3,
+    borderRadius: 25,
   },
   iconWrapper: {
     width: 30,

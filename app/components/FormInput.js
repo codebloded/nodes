@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
-import { TextInput } from 'react-native-paper';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import { TextInput } from 'react-native';
+import Ionicon from 'react-native-vector-icons/Ionicons';
 import { windowHeight, windowWidth } from '../utils/dimenssions';
 
 const Forminput = ({ placeholder, lableView, iconType, ...rest }) => {
     return (
         <View style={styles.inputContainer}>
-            <AntDesign
+            <Ionicon
                 name={iconType}
                 style={styles.iconStyle}
                 size={25}
@@ -30,20 +30,18 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         width: '100%',
         height: windowHeight / 15,
-        borderColor: '#ccc',
-        borderRadius: 3,
+        borderColor: '#666',
+        borderRadius: 25,
         borderWidth: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: '#fafafa',
     },
     iconStyle: {
         padding: 10,
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRightColor: '#ccc',
-        borderRightWidth: 1,
         width: 50,
     },
     input: {

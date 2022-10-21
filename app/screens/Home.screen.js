@@ -3,6 +3,11 @@ import { View, StyleSheet, Text, FlatList, Alert } from 'react-native';
 import { AuthContext } from '../navigation/AuthProvider';
 import CardLayout from '../components/layouts/Card.layout';
 import { Container } from '../styles/Feed.style';
+import BottomSheet from 'reanimated-bottom-sheet';
+import Animated from 'react-native-reanimated';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { AddCommnetInput, BottomContainer, CommentInnerContainer, Icons, InnerContainer } from '../styles/Home.styles';
+import { Avatar, TextInput } from 'react-native-paper';
 
 const Posts = [
 	{
@@ -50,13 +55,10 @@ const Posts = [
 			'This is a post of the user , Welcome to my applicatijn named node whwere you can connect with the other coders in this planet !',
 	},
 ];
-import BottomSheet from 'reanimated-bottom-sheet';
-import Animated from 'react-native-reanimated';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { BottomContainer, Icons, InnerContainer } from '../styles/Home.styles';
 const HomeScreen = () => {
 	const { logout } = useContext(AuthContext);
 	const bs = createRef();
+	const commnetBottomSheetRef = createRef();
 	const fall = new Animated.Value(1)
 	const renderInner = () => (
 		<BottomContainer>
@@ -73,6 +75,26 @@ const HomeScreen = () => {
 			</InnerContainer>
 		</BottomContainer>
 	);
+
+	const renderCommentInput = () => (
+		<BottomContainer>
+			<CommentInnerContainer>
+				<Avatar.Icon size={30} icon="account" />
+				<AddCommnetInput>
+					<TextInput
+						label="Add a comment"
+						mode="flat"
+						underlineColor='#fafafafa'
+						theme={{ colors: { primary: '#000' } }}
+						style={{ backgroundColor: '#fafafa' }}
+					/>
+				</AddCommnetInput>
+			</CommentInnerContainer>
+		</BottomContainer>
+
+	)
+
+
 	return (
 		<>
 
@@ -80,7 +102,7 @@ const HomeScreen = () => {
 				<FlatList
 					data={Posts}
 					keyExtractor={item => item.id.toString()}
-					renderItem={({ item }) => <CardLayout item={item} bs={bs} />}
+					renderItem={({ item }) => <CardLayout item={item} bs={bs} commnetBottomSheetRef={commnetBottomSheetRef} />}
 					showsVerticalScrollIndicator={false}
 				/>
 			</Container>
@@ -95,6 +117,18 @@ const HomeScreen = () => {
 				enabledContentGestureInteraction={true}
 				enabledInnerScrolling={false}
 			/>
+
+			<BottomSheet
+				ref={commnetBottomSheetRef}
+				snapPoints={[100, 0]}
+				renderContent={renderCommentInput}
+				initialSnap={1}
+				callbackNode={fall}
+				enabledGestureInteraction={true}
+				enabledContentGestureInteraction={true}
+				enabledInnerScrolling={false}
+			/>
+
 
 		</>
 

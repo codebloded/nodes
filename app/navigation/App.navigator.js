@@ -9,7 +9,11 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Octicons from 'react-native-vector-icons/Octicons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Avatar } from 'react-native-paper';
+import { TabIcon } from '../styles/Profile.styles';
+import ResetPassword from '../screens/ResetPassword.screen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -33,6 +37,11 @@ const ProfileStack = () => {
 				options={{ headerShown: false }}
 				component={ProfileScreen}
 			/>
+			<Stack.Screen
+				name="reset"
+				options={{ headerShown: false }}
+				component={ResetPassword}
+			/>
 		</Stack.Navigator>
 	);
 };
@@ -53,11 +62,15 @@ const AppNavigator = () => {
 		<>
 			<Tab.Navigator
 				initialRouteName="Home"
-				screenOptions={{ tabBarShowLabel: false }}>
+				screenOptions={{
+					tabBarShowLabel: false,
+					tabBarActiveBackgroundColor: '#fafafa',
+					tabBarInactiveBackgroundColor: '#fafafa',
+				}}>
 				<Tab.Screen
 
 					name="Feed"
-					options={{
+					options={({ navigation }) => ({
 						headerStyle: {
 							backgroundColor: '#fafafa',
 						},
@@ -78,7 +91,7 @@ const AppNavigator = () => {
 							<TouchableOpacity>
 								<Ionicons
 									name="ios-add-circle-sharp"
-									size={25}
+									size={28}
 									color="#333"
 									style={{ marginLeft: 15 }}
 								/>
@@ -86,14 +99,14 @@ const AppNavigator = () => {
 						),
 						tabBarIcon: ({ focused }) => (
 							<View>
-								<Feather
+								<Octicons
 									name="home"
 									size={25}
-									color={focused ? 'blue' : 'grey'}
+									color={focused ? 'black' : '#6666'}
 								/>
 							</View>
 						),
-					}}
+					})}
 					component={FeedStack}
 				/>
 				<Tab.Screen
@@ -104,7 +117,22 @@ const AppNavigator = () => {
 								<AntDesign
 									name="message1"
 									size={25}
-									color={focused ? 'blue' : 'grey'}
+									color={focused ? 'black' : '#6666'}
+								/>
+							</View>
+						),
+					}}
+					component={ChatStack}
+				/>
+				<Tab.Screen
+					name="x"
+					options={{
+						tabBarIcon: ({ focused, props }) => (
+							<View>
+								<AntDesign
+									name="hearto"
+									size={25}
+									color={focused ? 'black' : '#6666'}
 								/>
 							</View>
 						),
@@ -113,17 +141,31 @@ const AppNavigator = () => {
 				/>
 				<Tab.Screen
 					name="Profile"
-					options={{
+
+					options={({ navigation }) => ({
 						tabBarIcon: ({ focused }) => (
 							<View>
-								<MaterialCommunityIcons
-									name="account"
-									size={25}
-									color={focused ? 'blue' : 'grey'}
-								/>
+								{focused ?
+									<View style={{ borderWidth: 3, borderRadius: 20, borderColor: "#222" }}>
+										<Avatar.Image size={30} source={require("../assets/usr.jpg")} />
+									</View>
+									:
+									<Avatar.Image size={30} source={require("../assets/usr.jpg")} />
+								}
 							</View>
 						),
-					}}
+						headerLeft: () => (
+							<TouchableOpacity>
+								<Ionicons
+									name="ios-arrow-back-sharp"
+									size={28}
+									color="#333"
+									style={{ marginLeft: 15 }}
+									onPress={() => navigation.goBack()}
+								/>
+							</TouchableOpacity>
+						),
+					})}
 					component={ProfileStack}
 				/>
 			</Tab.Navigator>

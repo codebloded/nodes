@@ -21,3 +21,19 @@ export const InnerContainer = styled.View`
     margin-bottom: 10px;
     margin-top: 10px;
 `;
+export const CommentInnerContainer = styled.View`
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+   
+`;
+
+export const AddCommnetInput = styled.View`
+    flex: 1;
+    margin-left: 10px;
+    font-family: 'OpenSans-Regular';
+`;
+
+
+
+

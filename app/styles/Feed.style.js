@@ -2,9 +2,10 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: #fafafa;
+  background-color: #FAFAFA;
   padding: 20px;
   padding-top: 0px;
+  padding-bottom: 0px;
 `;
 export const Card = styled.View`
   background-color: #f3f3f3;
@@ -126,4 +127,11 @@ export const CommentText = styled.Text`
   font-size: 12px;
   font-family: 'OpenSans-Regular';
   color: #000;
+`;
+
+export const AddComment = styled.View`
+  flex-direction: row;
+  align-items: center;
+  padding-left: 5px;
+  margin-bottom: 10px;
 `;

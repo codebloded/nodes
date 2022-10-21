@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {View, Text, TouchableOpacity, StatusBar} from 'react-native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { View, Text, TouchableOpacity, StatusBar } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../screens/Login.screen';
 import OnboardingScreen from '../screens/Onboarding.screen';
 import AsyncStorage from '@react-native-community/async-storage';
 import SignupScreen from '../screens/Signup.screen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {GoogleSignin} from '@react-native-community/google-signin';
+import { GoogleSignin } from '@react-native-community/google-signin';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,18 +35,18 @@ function AuthNavigator() {
       <Stack.Navigator initialRouteName="Start">
         <Stack.Screen
           name="Start"
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
           component={OnboardingScreen}
         />
         <Stack.Screen
           name="Login"
           component={LoginScreen}
-          options={{header: () => null}}
+          options={{ header: () => null }}
         />
         <Stack.Screen
           name="signup"
           component={SignupScreen}
-          options={({navigation}) => ({
+          options={({ navigation }) => ({
             headerShadowVisible: false,
             title: '',
             headerStyle: {
